@@ -1,0 +1,6 @@
+8002,Bocky 190g,PCS,New,BOCKY 190G,23/12/19
+
+8002,Item,LSU-15,BOX,2.7,,,,,
+8002,Item,LSU-8,PCS,3.4,,,,,
+8002,Production BOM,1700,PC,1,,,,,
+
