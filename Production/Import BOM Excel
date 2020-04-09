@@ -1,0 +1,96 @@
+
+OBJECT Dataport 50006 Production BOM Data Load
+{
+  OBJECT-PROPERTIES
+  {
+    Date=02/01/20;
+    Time=14:33:19;
+    Modified=Yes;
+    Version List=DV 23-02-19,SUP2643;
+  }
+  PROPERTIES
+  {
+  }
+  DATAITEMS
+  {
+    { PROPERTIES
+      {
+        DataItemTable=Table99000771;
+      }
+      FIELDS
+      {
+        {      ;     ;"No."                }
+        {      ;     ;Description          }
+        {      ;     ;"Unit of Measure Code" }
+        {      ;     ;Status               }
+        {      ;     ;"Search Name"        }
+        {      ;     ;"Last Date Modified" }
+      }
+       }
+    { PROPERTIES
+      {
+        DataItemTable=Table99000772;
+        OnAfterImportRecord=BEGIN
+                              //SUP2643 -
+                              "Line No." := LineNo+10000;
+                              LineNo :="Line No.";
+
+                              CASE Type OF
+                                Type::Item:
+                                  BEGIN
+                                    item.GET("No.");
+                                    Description := item.Description;
+                                  END;
+                                Type::"Production BOM":
+                                  BEGIN
+                                    ProdBOMHeader.GET("No.");
+                                    Description := ProdBOMHeader.Description;
+
+                                  END;
+                                END;
+                              //SUP2643 +
+                            END;
+
+      }
+      FIELDS
+      {
+        {      ;     ;"Production BOM No." }
+        {      ;     ;Type                 }
+        {      ;     ;"No."               ;CallFieldValidate=Yes }
+        {      ;     ;"Unit of Measure Code" }
+        {      ;     ;"Quantity per"       }
+        {      ;     ;"Scrap %"            }
+        {      ;     ;Length               }
+        {      ;     ;Width                }
+        {      ;     ;Depth                }
+        {      ;     ;"Calculation Formula" }
+        {      ;     ;Description          }
+      }
+       }
+  }
+  REQUESTFORM
+  {
+    PROPERTIES
+    {
+      Width=9020;
+      Height=3410;
+    }
+    CONTROLS
+    {
+    }
+  }
+  CODE
+  {
+    VAR
+      item@100000000 : Record 27;
+      ProdBOMHeader@100000001 : Record 99000771;
+      LineNo@100000002 : Integer;
+
+    BEGIN
+    {
+      //SUP2643 MA 02/01/2020 - Added logic to assign "Line No" automatically and populate description from "Item card" or "BOM Header".
+    }
+    END.
+  }
+}
+
