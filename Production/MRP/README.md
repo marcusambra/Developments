@@ -1,4 +1,4 @@
 # MRP
-- This solution was created to only consider sales order wit status as released in the planning worksheet.
-- In this way Planning Worksheet will only consider demands from sales order if the status is Released.
+- This solution was originally created to consider only sales order with status as released, in the planning worksheet calculation.
+- In this way Planning Worksheet will consider only the demands from sales order if the status is Released.
 - This solution is used by companies which doesn't use Sales Quotes
