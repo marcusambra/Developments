@@ -1,0 +1,321 @@
+OBJECT Report 50001 Reopen Finished Prod. Order
+{
+  OBJECT-PROPERTIES
+  {
+    Date=16/04/20;
+    Time=11:20:09;
+    Modified=Yes;
+    Version List=MA003;
+  }
+  PROPERTIES
+  {
+    ProcessingOnly=Yes;
+  }
+  DATASET
+  {
+    { 4824;    ;DataItem;                    ;
+               DataItemTable=Table5405;
+               DataItemTableView=SORTING(Status,No.)
+                                 WHERE(Status=CONST(Finished));
+               OnPreDataItem=BEGIN
+                               IF GETFILTER("No.") = '' THEN
+                                 ERROR('Please enter a No. Filter');
+                             END;
+
+               OnAfterGetRecord=BEGIN
+                                  ChangeStatusOnProdOrder("Production Order");
+                                END;
+
+               ReqFilterFields=No. }
+
+  }
+  REQUESTPAGE
+  {
+    PROPERTIES
+    {
+    }
+    CONTROLS
+    {
+    }
+  }
+  LABELS
+  {
+  }
+  CODE
+  {
+    VAR
+      ToProdOrder@1000000019 : Record 5405;
+      NewStatus@1000000004 : 'Quote,Planned,Firm Planned,Released,Finished';
+      NewPostingDate@1000000003 : Date;
+      NewUpdateUnitCost@1000000002 : Boolean;
+      Error001@1110000000 : TextConst '@@@=vt03;ENU=The Product Order Line %1,%2 has "AMB Status" %3. In this Status a reopen is not allowed.\Please wait until the AMB Process are finsihed.';
+
+    PROCEDURE ChangeStatusOnProdOrder@10(ProdOrder@1000 : Record 5405);
+    BEGIN
+      SetPostingInfo(ProdOrder."Finished Date",FALSE);
+      TransProdOrder(ProdOrder);
+      COMMIT;
+    END;
+
+    LOCAL PROCEDURE TransProdOrder@1(VAR FromProdOrder@1000 : Record 5405);
+    VAR
+      ToProdOrderLine@1001 : Record 5406;
+    BEGIN
+      WITH FromProdOrder DO BEGIN
+        ToProdOrderLine.LOCKTABLE;
+
+        ToProdOrder := FromProdOrder;
+        ToProdOrder.Status := NewStatus;
+
+        ToProdOrder.INSERT(FALSE);
+        ToProdOrder."Finished Date" := 0D;
+        ToProdOrder."Starting Time" := "Starting Time";
+        ToProdOrder."Starting Date" := "Starting Date";
+        ToProdOrder."Ending Time" := "Ending Time";
+        ToProdOrder."Ending Date" := "Ending Date";
+        ToProdOrder."Due Date" := "Due Date";
+        //ToProdOrder.Released := FALSE;
+        ToProdOrder.VALIDATE("Shortcut Dimension 1 Code",'');
+        ToProdOrder.VALIDATE("Shortcut Dimension 2 Code",'');
+        ToProdOrder."Shortcut Dimension 1 Code" := "Shortcut Dimension 1 Code";
+        ToProdOrder."Shortcut Dimension 2 Code" := "Shortcut Dimension 2 Code";
+        ToProdOrder."Dimension Set ID" := "Dimension Set ID";
+        ToProdOrder.MODIFY;
+
+        TransProdOrderLine(FromProdOrder);
+        TransProdOrderRtngLine(FromProdOrder);
+        TransProdOrderComp(FromProdOrder);
+        TransProdOrderRtngTool(FromProdOrder);
+        TransProdOrderRtngPersnl(FromProdOrder);
+        TransProdOrdRtngQltyMeas(FromProdOrder);
+        TransProdOrderCmtLine(FromProdOrder);
+        TransProdOrderRtngCmtLn(FromProdOrder);
+        TransProdOrderBOMCmtLine(FromProdOrder);
+        DELETE;
+        FromProdOrder := ToProdOrder;
+      END;
+    END;
+
+    LOCAL PROCEDURE TransProdOrderLine@21(FromProdOrder@1003 : Record 5405);
+    VAR
+      FromProdOrderLine@1021 : Record 5406;
+      ToProdOrderLine@1020 : Record 5406;
+    BEGIN
+      WITH FromProdOrderLine DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderLine := FromProdOrderLine;
+            ToProdOrderLine.Status := ToProdOrder.Status;
+            ToProdOrderLine."Prod. Order No." := ToProdOrder."No.";
+            FromProdOrderLine."Shortcut Dimension 1 Code" := ToProdOrder."Shortcut Dimension 1 Code";
+            FromProdOrderLine."Shortcut Dimension 2 Code" := ToProdOrder."Shortcut Dimension 2 Code";
+            FromProdOrderLine."Dimension Set ID" := ToProdOrder."Dimension Set ID";
+            ToProdOrderLine.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+    END;
+
+    LOCAL PROCEDURE TransProdOrderRtngLine@20(FromProdOrder@1002 : Record 5405);
+    VAR
+      FromProdOrderRtngLine@1016 : Record 5409;
+      ToProdOrderRtngLine@1015 : Record 5409;
+    BEGIN
+      WITH FromProdOrderRtngLine DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderRtngLine := FromProdOrderRtngLine;
+            ToProdOrderRtngLine.Status := ToProdOrder.Status;
+            ToProdOrderRtngLine."Prod. Order No." := ToProdOrder."No.";
+            ToProdOrderRtngLine.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+    END;
+
+    LOCAL PROCEDURE TransProdOrderComp@17(FromProdOrder@1002 : Record 5405);
+    VAR
+      FromProdOrderComp@1014 : Record 5407;
+      ToProdOrderComp@1013 : Record 5407;
+    BEGIN
+      WITH FromProdOrderComp DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderComp := FromProdOrderComp;
+            ToProdOrderComp.Status := ToProdOrder.Status;
+            ToProdOrderComp."Prod. Order No." := ToProdOrder."No.";
+            ToProdOrderComp."Shortcut Dimension 1 Code" := ToProdOrder."Shortcut Dimension 1 Code";
+            ToProdOrderComp."Shortcut Dimension 2 Code" := ToProdOrder."Shortcut Dimension 2 Code";
+            ToProdOrderComp."Dimension Set ID" := ToProdOrder."Dimension Set ID";
+            ToProdOrderComp.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+    END;
+
+    LOCAL PROCEDURE TransProdOrderRtngTool@14(FromProdOrder@1002 : Record 5405);
+    VAR
+      FromProdOrderRtngTool@1010 : Record 5411;
+      ToProdOrderRoutTool@1009 : Record 5411;
+    BEGIN
+      WITH FromProdOrderRtngTool DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderRoutTool := FromProdOrderRtngTool;
+            ToProdOrderRoutTool.Status := ToProdOrder.Status;
+            ToProdOrderRoutTool."Prod. Order No." := ToProdOrder."No.";
+            ToProdOrderRoutTool.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+    END;
+
+    LOCAL PROCEDURE TransProdOrderRtngPersnl@11(FromProdOrder@1002 : Record 5405);
+    VAR
+      FromProdOrderRtngPersonnel@1008 : Record 5412;
+      ToProdOrderRtngPersonnel@1007 : Record 5412;
+    BEGIN
+      WITH FromProdOrderRtngPersonnel DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderRtngPersonnel := FromProdOrderRtngPersonnel;
+            ToProdOrderRtngPersonnel.Status := ToProdOrder.Status;
+            ToProdOrderRtngPersonnel."Prod. Order No." := ToProdOrder."No.";
+            ToProdOrderRtngPersonnel.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+    END;
+
+    LOCAL PROCEDURE TransProdOrdRtngQltyMeas@12(FromProdOrder@1002 : Record 5405);
+    VAR
+      FromProdOrderRtngQltyMeas@1010 : Record 5413;
+      ToProdOrderRtngQltyMeas@1009 : Record 5413;
+    BEGIN
+      WITH FromProdOrderRtngQltyMeas DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderRtngQltyMeas := FromProdOrderRtngQltyMeas;
+            ToProdOrderRtngQltyMeas.Status := ToProdOrder.Status;
+            ToProdOrderRtngQltyMeas."Prod. Order No." := ToProdOrder."No.";
+            ToProdOrderRtngQltyMeas.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+    END;
+
+    LOCAL PROCEDURE TransProdOrderCmtLine@13(FromProdOrder@1002 : Record 5405);
+    VAR
+      FromProdOrderCommentLine@1001 : Record 5414;
+      ToProdOrderCommentLine@1000 : Record 5414;
+    BEGIN
+      WITH FromProdOrderCommentLine DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderCommentLine := FromProdOrderCommentLine;
+            ToProdOrderCommentLine.Status := ToProdOrder.Status;
+            ToProdOrderCommentLine."Prod. Order No." := ToProdOrder."No.";
+            ToProdOrderCommentLine.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+      ToProdOrder.COPYLINKS(FromProdOrder);
+    END;
+
+    LOCAL PROCEDURE TransProdOrderRtngCmtLn@16(FromProdOrder@1002 : Record 5405);
+    VAR
+      FromProdOrderRtngComment@1006 : Record 5415;
+      ToProdOrderRtngComment@1005 : Record 5415;
+    BEGIN
+      WITH FromProdOrderRtngComment DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderRtngComment := FromProdOrderRtngComment;
+            ToProdOrderRtngComment.Status := ToProdOrder.Status;
+            ToProdOrderRtngComment."Prod. Order No." := ToProdOrder."No.";
+            ToProdOrderRtngComment.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+    END;
+
+    LOCAL PROCEDURE TransProdOrderBOMCmtLine@18(FromProdOrder@1002 : Record 5405);
+    VAR
+      FromProdOrderBOMComment@1004 : Record 5416;
+      ToProdOrderBOMComment@1003 : Record 5416;
+    BEGIN
+      WITH FromProdOrderBOMComment DO BEGIN
+        SETRANGE(Status,FromProdOrder.Status);
+        SETRANGE("Prod. Order No.",FromProdOrder."No.");
+        LOCKTABLE;
+        IF FINDSET THEN BEGIN
+          REPEAT
+            ToProdOrderBOMComment := FromProdOrderBOMComment;
+            ToProdOrderBOMComment.Status := ToProdOrder.Status;
+            ToProdOrderBOMComment."Prod. Order No." := ToProdOrder."No.";
+            ToProdOrderBOMComment.INSERT;
+          UNTIL NEXT = 0;
+          IF NOT ISEMPTY THEN
+            DELETEALL;
+        END;
+      END;
+    END;
+
+    PROCEDURE SetPostingInfo@2(PostingDate@1001 : Date;UpdateUnitCost@1000 : Boolean);
+    BEGIN
+      NewStatus := NewStatus::Released;
+      NewPostingDate := PostingDate;
+      NewUpdateUnitCost := UpdateUnitCost;
+    END;
+
+    BEGIN
+    {
+      //MA003 16/04/2020 MARCUS- Report created to reopen an finished production order
+    }
+    END.
+  }
+  RDLDATA
+  {
+  }
+}
+
