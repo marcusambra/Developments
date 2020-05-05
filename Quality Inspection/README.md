@@ -9,4 +9,4 @@ Setup
 Define the “No. Series” for “Quality Inspection Order” and “Posted
 Quality Inspection”
 
-![Purchase Setup](https://github.com/marcusambra/Developments/blob/master/Images/PurchaseSetup.png)
+![Purchase Setup](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Purchase_Setup_1.png)
