@@ -4,17 +4,23 @@ QUALITY INSPECTION
 Setup
 -----
 
-1.  Purchase & Payables Setup
+1.  PURCHASE & PAYABLES SETUP
 
 Define the “No. Series” for “Quality Inspection Order” and “Posted
 Quality Inspection”
 
 ![Purchase Setup](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Purchase_Setup_1.png)
 
-2.  Location Card
+2.  LOCATION
 
 In the location card you can define the bin code for the Quality Inspection. This bin is normally defined as Quarantine or QA which you can segregate the item in your warehouse. 
 
 The system will create a positive adjustment to the Bin Code informed in the field below
 
 ![Location](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Location_card_2.png)
+
+3.  ITEM CARD
+
+Here you can define if the item should be inspected when a “purchase receipt” or Prod. Order Output” is posted.
+
+![Item](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Item_Card_3.png)
