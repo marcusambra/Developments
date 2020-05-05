@@ -1,7 +1,7 @@
 KILL SESSION
 =============
 
-I have created functionalitty in NAV 2018 which allows you to kill the user session.
+I have created a toll in NAV 2018 which allows you to kill the user session.
 
 Technical Details
 ------------------
