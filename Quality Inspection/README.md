@@ -13,6 +13,7 @@ Quality Inspection”
 ![Purchase Setup](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Purchase_Setup_1.png)
 
 2.  LOCATION
+------------
 
 In the location card you can define the bin code for the Quality Inspection. This bin is normally defined as Quarantine or QA which you can segregate the item in your warehouse. 
 
@@ -21,12 +22,14 @@ The system will create a positive adjustment to the Bin Code informed in the fie
 ![Location](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Location_card_2.png)
 
 3.  ITEM CARD
+-------------
 
 Here you can define if the item should be inspected when a “purchase receipt” or Prod. Order Output” is posted.
 
 ![Item](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Item_Card_3.png)
 
 4.  VENDOR CARD
+---------------
 
 In the vendor Card you can define if all items from a specific vendor must be inspected once the purchase receipt is posted.
 
@@ -36,6 +39,7 @@ PROCESS
 -----
 
 5.  PRUCHASE ORDER
+------------------
 
 There is a Boolean field in the “Purchase Line” called “Quality Inspection” which is automatically set as True if the item or Vendor has been set to true.
 
@@ -52,6 +56,7 @@ If you navigate in the Warehouse Entry created from the Purchase Receipt, you wi
 ![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/warehouse_posting_7.png)
 
 ITEM LEDGER ENTRY:
+------------------
 
 There is a FlowField which shows the Quality Inspection linked to the Item ledger Entry:
 
@@ -77,6 +82,7 @@ You can add comments in the line:
 ![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_12.png)
 
 Quality Check List:
+-------------------
 
 Here you can include all relevant information about the quality inspection process.
 
@@ -95,6 +101,7 @@ Once the status has been changed, the Quality Inspection has been transferred to
 ![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_17.png)
 
 PRODUCTION ORDER
+----------------
 
 The same process applies to production orders, which the Quality Inspection will be created once the Output journal is posted
 
