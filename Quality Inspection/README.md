@@ -5,6 +5,7 @@ Setup
 -----
 
 1.  PURCHASE & PAYABLES SETUP
+-----------------------------
 
 Define the “No. Series” for “Quality Inspection Order” and “Posted
 Quality Inspection”
