@@ -36,6 +36,7 @@ Page: 459-Sales & Receivables Setup
 
 
 Codeunit: 414-Release Sales Document
+
 ![Purchase Setup](https://github.com/marcusambra/Images/blob/master/Sales/Auto%20Archive/5_Image.png)
 
 
