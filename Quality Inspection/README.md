@@ -55,7 +55,7 @@ If you navigate in the Warehouse Entry created from the Purchase Receipt, you wi
 
 ![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/warehouse_posting_7.png)
 
-ITEM LEDGER ENTRY:
+6.  ITEM LEDGER ENTRY:
 ------------------
 
 There is a FlowField which shows the Quality Inspection linked to the Item ledger Entry:
@@ -71,7 +71,7 @@ There is a validation which does not allow you to use the item, if the available
 ![Validation](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Error_10.png)
 
 
-Quality Inspection Order
+7.  Quality Inspection Order
 -----
 As can be seen below, the quality inspection was created, and it is open for inspection.
 
@@ -81,7 +81,7 @@ You can add comments in the line:
 
 ![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_12.png)
 
-Quality Check List:
+8.  Quality Check List:
 -------------------
 
 Here you can include all relevant information about the quality inspection process.
@@ -100,7 +100,7 @@ Once the status has been changed, the Quality Inspection has been transferred to
 
 ![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_17.png)
 
-PRODUCTION ORDER
+9.  PRODUCTION ORDER
 ----------------
 
 The same process applies to production orders, which the Quality Inspection will be created once the Output journal is posted
