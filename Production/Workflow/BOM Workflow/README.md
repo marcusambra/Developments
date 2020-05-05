@@ -1,6 +1,9 @@
 Production BOM - Approval Workflow
 ===================================
 
+I have created an bespoke workflow to control the Bill of Material in the production module.
+
+The status of the "Prod. BOM" can only be changed to certified if 
 Technical Details
 -----------------
 
