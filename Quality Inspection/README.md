@@ -42,3 +42,44 @@ You can also mark this field manually if you want to create a Quality Inspection
 
 ![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/purchase_order_5.png)
 
+Once the “Purchase Receipt” is posted, then the Quality Inspection entry is created:
+![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/purchase_order_6.png)
+
+If you navigate in the Warehouse Entry created from the Purchase Receipt, you will see the Positive Adjustment has been posted to the bin Code “QA” which was defined in the Location Card.
+![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/warehouse_posting_7.png)
+
+ITEM LEDGER ENTRY:
+
+There is a FlowField which shows the Quality Inspection linked to the Item ledger Entry:
+![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/ILE_8.png)
+
+In the item card you can also see how many quantities is/are in quality inspection:
+![Item_Card](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Item_9.png)
+
+There is a validation which does not allow you to use the item, if the available item is on Quality Inspection.
+![Validation](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Error_10.png)
+
+
+Quality Inspection Order
+-----
+As can be seen below, the quality inspection was created, and it is open for inspection.
+![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_11.png)
+
+You can add comments in the line:
+![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_12.png)
+
+Quality Check List:
+Here you can include all relevant information about the quality inspection process.
+![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_13.png)
+
+Once the Inspection Order was approved, then you can change the status to Closed
+![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_14.png)
+
+![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_15.png)
+
+Once the status has been changed, the Quality Inspection has been transferred to Finished Quality Inspection List
+![QI](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/QI_16.png)
+
+
+
+
