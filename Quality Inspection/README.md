@@ -24,3 +24,9 @@ The system will create a positive adjustment to the Bin Code informed in the fie
 Here you can define if the item should be inspected when a “purchase receipt” or Prod. Order Output” is posted.
 
 ![Item](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Item_Card_3.png)
+
+4.  VENDOR CARD
+
+In the vendor Card you can define if all items from a specific vendor must be inspected once the purchase receipt is posted.
+
+![Vendor](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Vendor_Card_4.png)
