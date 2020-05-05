@@ -9,7 +9,7 @@ Technical Details
 Page: 9506-Session List
 Action Page
 
-![Technical] (https://github.com/marcusambra/Images/blob/master/Kill%20Session/1-Image.png)
+![Technical](https://github.com/marcusambra/Images/blob/master/Kill%20Session/1-Image.png)
 
 ![Technical] (https://github.com/marcusambra/Images/blob/master/Kill%20Session/2-Image.png)
 
