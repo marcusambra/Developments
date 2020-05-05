@@ -30,3 +30,15 @@ Here you can define if the item should be inspected when a “purchase receipt�
 In the vendor Card you can define if all items from a specific vendor must be inspected once the purchase receipt is posted.
 
 ![Vendor](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/Vendor_Card_4.png)
+
+PROCESS
+-----
+
+5.  PRUCHASE ORDER
+
+There is a Boolean field in the “Purchase Line” called “Quality Inspection” which is automatically set as True if the item or Vendor has been set to true.
+
+You can also mark this field manually if you want to create a Quality Inspection for an item which hasn’t been previously defined to be inspected.
+
+![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/purchase_order_5.png)
+
