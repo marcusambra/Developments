@@ -39,7 +39,7 @@ Function: SetupGenJnlLine
 
 ![GL Entries](https://github.com/marcusambra/Images/blob/master/Purchase/Invoice%20Description/6-Image.png)
 
-object changes
+OBJECT CHANGE
 --------------
 
 ![GL Entries](https://github.com/marcusambra/Images/blob/master/Purchase/Invoice%20Description/7-Image.png)
