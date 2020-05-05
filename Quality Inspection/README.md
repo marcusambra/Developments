@@ -38,7 +38,7 @@ In the vendor Card you can define if all items from a specific vendor must be in
 PROCESS
 -----
 
-5.  PRUCHASE ORDER
+5.  PURCHASE ORDER
 ------------------
 
 There is a Boolean field in the “Purchase Line” called “Quality Inspection” which is automatically set as True if the item or Vendor has been set to true.
