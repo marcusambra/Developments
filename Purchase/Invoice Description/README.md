@@ -20,18 +20,20 @@ Technical Details
 ------------------
 
 Table: 49 – Invoice Post. Buffer
+--------------------------------
 We have added a new field called “Posting Description”
 
 ![GL Entries](https://github.com/marcusambra/Images/blob/master/Purchase/Invoice%20Description/4-Image.png)
 
 Table: 49 – Invoice Post. Buffer
-
+-------------------------------
 Keys: Posting Description
 The new key is needed to allow more then 2 lines with the same GL Account.
 
 ![GL Entries](https://github.com/marcusambra/Images/blob/master/Purchase/Invoice%20Description/5-Image.png)
 
 Table: 49 - Invoice Post. Buffer
+---------------------------------
 Trigger: PreparePurchase
 
 We have added the folowing code:
@@ -39,6 +41,7 @@ We have added the folowing code:
 ![GL Entries](https://github.com/marcusambra/Images/blob/master/Purchase/Invoice%20Description/6-Image.png)
 
 Codeunit: 90 – Purch.-Post
+---------------------------
 Function: SetupGenJnlLine
 
 ![GL Entries](https://github.com/marcusambra/Images/blob/master/Purchase/Invoice%20Description/7-Image.png)
