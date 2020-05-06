@@ -1,6 +1,9 @@
 QUALITY INSPECTION
 ==================
 
+I have created a bespoke functionality in NAV to be used by the Quality team in order to inspect items received by suppliers and from production Order output.
+
+
 Setup
 -----
 
@@ -51,7 +54,7 @@ Once the “Purchase Receipt” is posted, then the Quality Inspection entry is 
 
 ![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/purchase_order_6.png)
 
-If you navigate in the Warehouse Entry created from the Purchase Receipt, you will see the Positive Adjustment has been posted to the bin Code “QA” which was defined in the Location Card.
+If you navigate in the Warehouse Entry created from the Purchase Receipt, you will see the Positive Adjustment has been posted to the bin Code “QI” which was defined in the Location Card.
 
 ![Purchase_order](https://github.com/marcusambra/Developments/blob/master/Quality%20Inspection/Images/warehouse_posting_7.png)
 
