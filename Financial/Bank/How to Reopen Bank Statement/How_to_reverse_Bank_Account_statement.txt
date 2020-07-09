@@ -1,0 +1,139 @@
+OBJECT Report 50000 Reverse Bank Acc. Statement
+{
+  OBJECT-PROPERTIES
+  {
+    Date=07/11/18;
+    Time=12:00:00;
+    Modified=Yes;
+    Version List=JC1.000;
+  }
+  PROPERTIES
+  {
+    Permissions=TableData 270=rimd,
+                TableData 271=rimd,
+                TableData 273=rimd,
+                TableData 274=rimd,
+                TableData 275=rimd,
+                TableData 276=rimd;
+    CaptionML=[ENU=Reverse Bank Account Statement;
+               ENG=Reverse Bank Account Statement];
+    ProcessingOnly=Yes;
+    OnPostReport=BEGIN
+                   IF BankAccount.GET(BankAccountNo) THEN BEGIN
+                     BankAccount."Last Statement No." := '';
+                     BankAccount."Balance Last Statement" := 0;
+                     BankAccount.MODIFY;
+                   END;
+
+                   IF BankAccountStatement.GET(BankAccountNo,StatementNo) THEN
+                     BankAccountStatement.DELETE(TRUE);
+
+                   IF GUIALLOWED THEN
+                     MESSAGE(Text001);
+                 END;
+
+  }
+  DATASET
+  {
+    { 1100267000;;DataItem;                  ;
+               DataItemTable=Table271;
+               DataItemTableView=SORTING(Entry No.);
+               OnPreDataItem=BEGIN
+                               SETRANGE("Bank Account No.",BankAccountNo);
+                               SETRANGE("Statement No.",StatementNo);
+                               SETRANGE(Open,FALSE);
+                               SETRANGE("Statement Status","Bank Account Ledger Entry"."Statement Status"::Closed);
+                             END;
+
+               OnAfterGetRecord=BEGIN
+                                  Open := TRUE;
+                                  "Statement Status" := "Statement Status"::"Bank Acc. Entry Applied";
+                                  "Remaining Amount" := Amount;
+                                  MODIFY;
+                                END;
+                                 }
+
+    { 1100267001;;DataItem;                  ;
+               DataItemTable=Table275;
+               DataItemTableView=SORTING(Bank Account No.,Statement No.);
+               OnPreDataItem=BEGIN
+                               SETRANGE("Bank Account No.",BankAccountNo);
+                               SETRANGE("Statement No.",StatementNo);
+                             END;
+
+               OnAfterGetRecord=VAR
+                                  BankAccReconciliation@1100267000 : Record 273;
+                                BEGIN
+                                  BankAccReconciliation.INIT;
+                                  BankAccReconciliation.TRANSFERFIELDS("Bank Account Statement");
+                                  BankAccReconciliation.INSERT;
+                                END;
+                                 }
+
+    { 1100267002;1;DataItem;                 ;
+               DataItemTable=Table276;
+               DataItemTableView=SORTING(Bank Account No.,Statement No.,Statement Line No.);
+               OnAfterGetRecord=VAR
+                                  BankAccReconciliationLine@1100267000 : Record 274;
+                                BEGIN
+                                  BankAccReconciliationLine.INIT;
+                                  BankAccReconciliationLine.TRANSFERFIELDS("Bank Account Statement Line");
+                                  BankAccReconciliationLine.INSERT;
+                                END;
+
+               DataItemLink=Bank Account No.=FIELD(Bank Account No.),
+                            Statement No.=FIELD(Statement No.) }
+
+  }
+  REQUESTPAGE
+  {
+    PROPERTIES
+    {
+      SaveValues=Yes;
+    }
+    CONTROLS
+    {
+      { 1100267000;;Container;
+                  ContainerType=ContentArea }
+
+      { 1100267001;1;Group  ;
+                  CaptionML=[ENU=Options;
+                             ENG=Options];
+                  GroupType=Group }
+
+      { 1100267002;2;Field  ;
+                  CaptionML=[ENU=Bank Account No.;
+                             ENG=Bank Account No.];
+                  SourceExpr=BankAccountNo;
+                  TableRelation="Bank Account" }
+
+      { 1100267003;2;Field  ;
+                  CaptionML=[ENU=Statement No.;
+                             ENG=Statement No.];
+                  SourceExpr=StatementNo }
+
+    }
+  }
+  LABELS
+  {
+  }
+  CODE
+  {
+    VAR
+      BankAccount@1100267003 : Record 270;
+      BankAccountStatement@1100267004 : Record 275;
+      BankAccountNo@1100267000 : Code[20];
+      StatementNo@1100267001 : Code[20];
+      Text001@1100267002 : TextConst 'ENU=Process finished.;ENG=Process finished.';
+
+    BEGIN
+    {
+      JC1.000 - J Chaloupka 07/11/18 Reverse Bank Account Statement
+        Object created
+    }
+    END.
+  }
+  RDLDATA
+  {
+  }
+}
