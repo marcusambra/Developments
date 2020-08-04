@@ -1,7 +1,7 @@
 AUTO ARCHIVE SALES DOCUMENT
 ==================
 
-I have extended the standard auto archive functionality for sales order, which will archive the lateast version of the saler quote/order once the doucment is released.
+I have extended the standard auto archive functionality for sales order, which will archive the lateast version of the sales quote/order once the document is released.
 
 This is useful for companies which want to track all modifications performed in the order before the document was released. 
 
