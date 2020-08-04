@@ -22,7 +22,7 @@ Technical Details
 ![Tecnical](https://github.com/marcusambra/Images/blob/master/Workflow/BOMWorkflow/3-Image.png)
 ![Tecnical](https://github.com/marcusambra/Images/blob/master/Workflow/BOMWorkflow/4-Image.png)
 
-3.Codeunit 1510: 49 – Notification Management
+3.Codeunit 1510 – Notification Management
 ----------------------------------------------
 GetDocumentTypeAndNumber
 
